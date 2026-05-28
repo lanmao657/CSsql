@@ -1,0 +1,23 @@
+# 依赖
+frontend/node_modules/
+
+# 构建产物（由 CI/CD 或本地构建生成）
+frontend/dist/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Docker 数据卷
+pgdata/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 操作系统
+.DS_Store
+Thumbs.db
