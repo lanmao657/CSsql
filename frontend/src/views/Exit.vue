@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="page-title">车辆出场</h2>
+    <PageBanner type="exit" />
 
     <el-card shadow="never" style="margin-bottom: 20px">
       <template #header><span>出场操作</span></template>
@@ -58,6 +58,7 @@
 import { ref, onMounted } from 'vue'
 import { ElMessage } from 'element-plus'
 import { vehicleExit, getExits } from '../api/parking'
+import PageBanner from '../components/PageBanner.vue'
 
 const plate = ref('')
 const exits = ref([])

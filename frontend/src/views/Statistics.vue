@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="page-title">统计分析</h2>
+    <PageBanner type="statistics" />
 
     <!-- 每日路段统计 -->
     <el-card shadow="never" style="margin-bottom: 20px">
@@ -67,6 +67,7 @@
 import { ref, onMounted } from 'vue'
 import { getDailyStats } from '../api/stats'
 import { getAvailableSpaces } from '../api/spaces'
+import PageBanner from '../components/PageBanner.vue'
 
 const statDate = ref(new Date().toISOString().slice(0, 10))
 const stats = ref([])

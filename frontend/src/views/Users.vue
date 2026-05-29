@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="page-title">用户管理</h2>
+    <PageBanner type="users" />
 
     <!-- 用户注册 -->
     <el-card shadow="never" style="margin-bottom: 20px">
@@ -90,6 +90,7 @@
 import { ref, onMounted } from 'vue'
 import { ElMessage } from 'element-plus'
 import { getUsers, addUser, topupUser as topupUserApi, getUserVehicles, bindVehicle } from '../api/users'
+import PageBanner from '../components/PageBanner.vue'
 
 const users = ref([])
 const form = ref({ username: '', phone: '', balance: 0 })

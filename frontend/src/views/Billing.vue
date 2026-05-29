@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="page-title">计费记录</h2>
+    <PageBanner type="billing" />
 
     <el-card shadow="never">
       <template #header><span>计费明细</span></template>
@@ -52,6 +52,7 @@
 import { ref, onMounted } from 'vue'
 import { ElMessage } from 'element-plus'
 import { getBilling, payBilling } from '../api/billing'
+import PageBanner from '../components/PageBanner.vue'
 
 const billing = ref([])
 

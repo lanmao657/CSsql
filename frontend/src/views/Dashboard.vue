@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="page-title">系统总览</h2>
+    <PageBanner type="dashboard" />
 
     <!-- 统计卡片 -->
     <el-row :gutter="16" class="stat-row">
@@ -52,6 +52,7 @@ import { getRoads } from '../api/roads'
 import { getSpaces } from '../api/spaces'
 import { getDailyStats } from '../api/stats'
 import SpaceGrid from '../components/SpaceGrid.vue'
+import PageBanner from '../components/PageBanner.vue'
 
 const stats = ref({})
 const roads = ref([])

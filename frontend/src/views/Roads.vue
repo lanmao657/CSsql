@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="page-title">路段管理</h2>
+    <PageBanner type="roads" />
 
     <!-- 添加路段 -->
     <el-card shadow="never" style="margin-bottom: 20px">
@@ -91,6 +91,7 @@
 import { ref, onMounted } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { getRoads, addRoad, deleteRoad, getStandards, addStandard } from '../api/roads'
+import PageBanner from '../components/PageBanner.vue'
 
 const roads = ref([])
 const standards = ref([])

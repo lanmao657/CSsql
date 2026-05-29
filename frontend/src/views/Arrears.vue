@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="page-title">欠费追缴记录</h2>
+    <PageBanner type="arrears" />
 
     <el-card shadow="never">
       <template #header>
@@ -51,6 +51,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { getArrears } from '../api/billing'
+import PageBanner from '../components/PageBanner.vue'
 
 const arrears = ref([])
 const statusFilter = ref('')

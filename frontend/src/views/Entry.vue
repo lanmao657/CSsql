@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="page-title">车辆入场</h2>
+    <PageBanner type="entry" />
 
     <el-card shadow="never" style="margin-bottom: 20px">
       <template #header><span>入场登记</span></template>
@@ -65,6 +65,7 @@ import { ElMessage } from 'element-plus'
 import { getRoads } from '../api/roads'
 import { getAvailableSpaces } from '../api/spaces'
 import { vehicleEntry, getEntries } from '../api/parking'
+import PageBanner from '../components/PageBanner.vue'
 
 const roads = ref([])
 const availableSpaces = ref([])

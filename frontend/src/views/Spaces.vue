@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="page-title">车位管理</h2>
+    <PageBanner type="spaces" />
 
     <el-card shadow="never" style="margin-bottom: 20px" v-loading="loading">
       <template #header>
@@ -44,6 +44,7 @@ import { ref, onMounted } from 'vue'
 import { getRoads } from '../api/roads'
 import { getSpaces, getAvailableSpaces } from '../api/spaces'
 import SpaceGrid from '../components/SpaceGrid.vue'
+import PageBanner from '../components/PageBanner.vue'
 
 const roads = ref([])
 const spaces = ref([])
