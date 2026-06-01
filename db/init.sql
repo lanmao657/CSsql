@@ -337,7 +337,11 @@ INSERT INTO road_sections (road_name, section_code, total_spaces, address) VALUE
     ('中山北路',   'ZSBL-001', 8,  '中山北路100-200号东侧'),
     ('人民南路',   'RMNL-002', 6,  '人民南路50-150号西侧'),
     ('解放大道',   'JFDD-003', 10, '解放大道300-500号南侧'),
-    ('建设路',     'JSLU-004', 5,  '建设路1-80号两侧');
+    ('建设路',     'JSLU-004', 5,  '建设路1-80号两侧'),
+    ('文化路',     'WHLU-005', 8,  '文化路10-120号南侧'),
+    ('滨江大道',   'BJDD-006', 10, '滨江大道1000-1200号沿江侧'),
+    ('科技园南路', 'KJYN-007', 8,  '科技园南路1-60号东侧'),
+    ('湖滨北路',   'HBBN-008', 6,  '湖滨北路200-350号西侧');
 
 -- 收费标准（按路段 × 时段）
 INSERT INTO charging_standards (road_id, period_name, start_hour, end_hour, price_per_hour) VALUES
@@ -355,7 +359,22 @@ INSERT INTO charging_standards (road_id, period_name, start_hour, end_hour, pric
     (3, '晚高峰', 17, 19, 12.00),
     (3, '夜间',   19, 7,   4.00),
     -- 建设路
-    (4, '全天',   0, 24,   5.00);
+    (4, '全天',   0, 24,   5.00),
+    -- 文化路
+    (5, '日间',   8, 20,   8.00),
+    (5, '夜间',   20, 8,   3.00),
+    -- 滨江大道
+    (6, '早高峰', 7, 9,   15.00),
+    (6, '日间',   9, 17,  12.00),
+    (6, '晚高峰', 17, 19, 15.00),
+    (6, '夜间',   19, 7,   5.00),
+    -- 科技园南路
+    (7, '工作日白天', 8, 18,  6.00),
+    (7, '工作日夜间', 18, 8,  2.00),
+    (7, '周末全天',   0, 24,  4.00),
+    -- 湖滨北路
+    (8, '日间',   9, 21,   7.00),
+    (8, '夜间',   21, 9,   2.50);
 
 -- 停车位（中山北路 A01-A08）
 INSERT INTO parking_spaces (road_id, space_number, space_position) VALUES
@@ -398,12 +417,61 @@ INSERT INTO parking_spaces (road_id, space_number, space_position) VALUES
     (4, 'D04', '路段末端'),
     (4, 'D05', '路段末端');
 
+-- 停车位（文化路 E01-E08）
+INSERT INTO parking_spaces (road_id, space_number, space_position) VALUES
+    (5, 'E01', '路段起点南侧'),
+    (5, 'E02', '路段起点南侧'),
+    (5, 'E03', '路段中段南侧'),
+    (5, 'E04', '路段中段南侧'),
+    (5, 'E05', '路段中段南侧'),
+    (5, 'E06', '路段中段南侧'),
+    (5, 'E07', '路段末端南侧'),
+    (5, 'E08', '路段末端南侧');
+
+-- 停车位（滨江大道 F01-F10）
+INSERT INTO parking_spaces (road_id, space_number, space_position) VALUES
+    (6, 'F01', '路段起点沿江侧'),
+    (6, 'F02', '路段起点沿江侧'),
+    (6, 'F03', '路段中段沿江侧'),
+    (6, 'F04', '路段中段沿江侧'),
+    (6, 'F05', '路段中段沿江侧'),
+    (6, 'F06', '路段中段沿江侧'),
+    (6, 'F07', '路段中段沿江侧'),
+    (6, 'F08', '路段末端沿江侧'),
+    (6, 'F09', '路段末端沿江侧'),
+    (6, 'F10', '路段末端沿江侧');
+
+-- 停车位（科技园南路 G01-G08）
+INSERT INTO parking_spaces (road_id, space_number, space_position) VALUES
+    (7, 'G01', '路段起点东侧'),
+    (7, 'G02', '路段起点东侧'),
+    (7, 'G03', '路段中段东侧'),
+    (7, 'G04', '路段中段东侧'),
+    (7, 'G05', '路段中段东侧'),
+    (7, 'G06', '路段中段东侧'),
+    (7, 'G07', '路段末端东侧'),
+    (7, 'G08', '路段末端东侧');
+
+-- 停车位（湖滨北路 H01-H06）
+INSERT INTO parking_spaces (road_id, space_number, space_position) VALUES
+    (8, 'H01', '路段起点西侧'),
+    (8, 'H02', '路段起点西侧'),
+    (8, 'H03', '路段中段西侧'),
+    (8, 'H04', '路段中段西侧'),
+    (8, 'H05', '路段末端西侧'),
+    (8, 'H06', '路段末端西侧');
+
 -- 用户
 INSERT INTO users (username, phone, balance) VALUES
     ('张三', '13800001111', 200.00),
     ('李四', '13800002222',  15.00),
     ('王五', '13800003333', 500.00),
-    ('赵六', '13800004444',   0.00);
+    ('赵六', '13800004444',   0.00),
+    ('钱七', '13800005555',   5.00),
+    ('孙八', '13800006666',  80.00),
+    ('周九', '13800007777', 300.00),
+    ('吴十', '13800008888',  25.00),
+    ('郑婷', '13800009999',  10.00);
 
 -- 用户车辆绑定
 INSERT INTO user_vehicles (user_id, plate_number) VALUES
@@ -411,14 +479,25 @@ INSERT INTO user_vehicles (user_id, plate_number) VALUES
     (1, '京A·67890'),
     (2, '沪B·88888'),
     (3, '粤C·66666'),
-    (4, '浙D·99999');
+    (4, '浙D·99999'),
+    (5, '苏E·55555'),
+    (6, '闽F·77777'),
+    (7, '赣G·33333'),
+    (8, '鄂H·22222'),
+    (9, '湘J·11111');
 
 -- 模拟当前占用（部分车位已被占用）
 INSERT INTO entry_records (plate_number, road_id, space_id, entry_time, geomagnetic_status) VALUES
-    ('京A·12345', 1, 1, CURRENT_TIMESTAMP - INTERVAL '45 minutes', 'occupied'),
-    ('沪B·88888', 1, 3, CURRENT_TIMESTAMP - INTERVAL '2 hours',    'occupied'),
-    ('粤C·66666', 2, 9, CURRENT_TIMESTAMP - INTERVAL '30 minutes', 'occupied'),
-    ('京A·67890', 3, 15, CURRENT_TIMESTAMP - INTERVAL '1 hour',    'occupied');
+    ('京A·12345', 1, 1,  CURRENT_TIMESTAMP - INTERVAL '45 minutes', 'occupied'),
+    ('沪B·88888', 1, 3,  CURRENT_TIMESTAMP - INTERVAL '2 hours',    'occupied'),
+    ('粤C·66666', 2, 9,  CURRENT_TIMESTAMP - INTERVAL '30 minutes', 'occupied'),
+    ('京A·67890', 3, 15, CURRENT_TIMESTAMP - INTERVAL '1 hour',     'occupied'),
+    ('苏E·55555', 5, 30, CURRENT_TIMESTAMP - INTERVAL '1.5 hours',  'occupied'),
+    ('闽F·77777', 6, 36, CURRENT_TIMESTAMP - INTERVAL '2 hours',    'occupied'),
+    ('赣G·33333', 7, 38, CURRENT_TIMESTAMP - INTERVAL '40 minutes', 'occupied'),
+    ('鄂H·22222', 8, 42, CURRENT_TIMESTAMP - INTERVAL '1 hour',     'occupied'),
+    ('湘J·11111', 3, 22, CURRENT_TIMESTAMP - INTERVAL '3 hours',    'occupied'),
+    ('浙D·99999', 4, 27, CURRENT_TIMESTAMP - INTERVAL '50 minutes', 'occupied');
 
 -- 更新被占用车位状态
 UPDATE parking_spaces SET status='occupied', plate_number='京A·12345',
@@ -429,15 +508,30 @@ UPDATE parking_spaces SET status='occupied', plate_number='粤C·66666',
     occupied_at=CURRENT_TIMESTAMP - INTERVAL '30 minutes' WHERE space_id=9;
 UPDATE parking_spaces SET status='occupied', plate_number='京A·67890',
     occupied_at=CURRENT_TIMESTAMP - INTERVAL '1 hour' WHERE space_id=15;
+UPDATE parking_spaces SET status='occupied', plate_number='苏E·55555',
+    occupied_at=CURRENT_TIMESTAMP - INTERVAL '1.5 hours' WHERE space_id=30;
+UPDATE parking_spaces SET status='occupied', plate_number='闽F·77777',
+    occupied_at=CURRENT_TIMESTAMP - INTERVAL '2 hours' WHERE space_id=36;
+UPDATE parking_spaces SET status='occupied', plate_number='赣G·33333',
+    occupied_at=CURRENT_TIMESTAMP - INTERVAL '40 minutes' WHERE space_id=38;
+UPDATE parking_spaces SET status='occupied', plate_number='鄂H·22222',
+    occupied_at=CURRENT_TIMESTAMP - INTERVAL '1 hour' WHERE space_id=42;
+UPDATE parking_spaces SET status='occupied', plate_number='湘J·11111',
+    occupied_at=CURRENT_TIMESTAMP - INTERVAL '3 hours' WHERE space_id=22;
+UPDATE parking_spaces SET status='occupied', plate_number='浙D·99999',
+    occupied_at=CURRENT_TIMESTAMP - INTERVAL '50 minutes' WHERE space_id=27;
 
 -- 模拟历史出场和计费记录（今天已完成的停车）
+-- 触发器自动：计算费用 → 生成计费记录 → 余额充足自动扣款/不足生成欠费
 DO $$
 DECLARE
     v_entry_id   INTEGER;
     v_exit_id    INTEGER;
     v_billing_id INTEGER;
 BEGIN
-    -- 记录1: 浙D·99999 在中山北路 A02 停了2小时
+    -- ===== 原有3条历史记录 =====
+
+    -- 记录1: 浙D·99999 在中山北路 A02 停了2小时（张三余额200→自动扣款）
     INSERT INTO entry_records (plate_number, road_id, space_id, entry_time, geomagnetic_status)
     VALUES ('浙D·99999', 1, 2, CURRENT_DATE + INTERVAL '8 hours', 'occupied')
     RETURNING entry_id INTO v_entry_id;
@@ -445,10 +539,9 @@ BEGIN
     INSERT INTO exit_records (entry_id, plate_number, road_id, space_id, entry_time, exit_time)
     VALUES (v_entry_id, '浙D·99999', 1, 2,
             CURRENT_DATE + INTERVAL '8 hours',
-            CURRENT_DATE + INTERVAL '10 hours')
-    RETURNING exit_id INTO v_exit_id;
+            CURRENT_DATE + INTERVAL '10 hours');
 
-    -- 记录2: 粤C·66666 在解放大道 C03 停了1小时
+    -- 记录2: 粤C·66666 在解放大道 C03 停了1小时（王五余额500→自动扣款）
     INSERT INTO entry_records (plate_number, road_id, space_id, entry_time, geomagnetic_status)
     VALUES ('粤C·66666', 3, 17, CURRENT_DATE + INTERVAL '9 hours', 'occupied')
     RETURNING entry_id INTO v_entry_id;
@@ -458,7 +551,7 @@ BEGIN
             CURRENT_DATE + INTERVAL '9 hours',
             CURRENT_DATE + INTERVAL '10 hours');
 
-    -- 记录3: 京A·12345 在人民南路 B05 停了3小时
+    -- 记录3: 京A·12345 在人民南路 B05 停了3小时（张三余额充足→自动扣款）
     INSERT INTO entry_records (plate_number, road_id, space_id, entry_time, geomagnetic_status)
     VALUES ('京A·12345', 2, 13, CURRENT_DATE + INTERVAL '7 hours', 'occupied')
     RETURNING entry_id INTO v_entry_id;
@@ -467,4 +560,126 @@ BEGIN
     VALUES (v_entry_id, '京A·12345', 2, 13,
             CURRENT_DATE + INTERVAL '7 hours',
             CURRENT_DATE + INTERVAL '10 hours');
+
+    -- ===== 新增8条历史记录（覆盖更多路段和用户） =====
+
+    -- 记录4: 苏E·55555 在文化路 E02 停45分钟（钱七余额5.00→自动扣款6.00，余额不足→欠费）
+    INSERT INTO entry_records (plate_number, road_id, space_id, entry_time, geomagnetic_status)
+    VALUES ('苏E·55555', 5, 31, CURRENT_DATE + INTERVAL '10 hours', 'occupied')
+    RETURNING entry_id INTO v_entry_id;
+
+    INSERT INTO exit_records (entry_id, plate_number, road_id, space_id, entry_time, exit_time)
+    VALUES (v_entry_id, '苏E·55555', 5, 31,
+            CURRENT_DATE + INTERVAL '10 hours',
+            CURRENT_DATE + INTERVAL '10 hours 45 minutes');
+
+    -- 记录5: 赣G·33333 在滨江大道 F04 停1小时晚高峰（周九余额300→自动扣款15.00）
+    INSERT INTO entry_records (plate_number, road_id, space_id, entry_time, geomagnetic_status)
+    VALUES ('赣G·33333', 6, 37, CURRENT_DATE + INTERVAL '17 hours 30 minutes', 'occupied')
+    RETURNING entry_id INTO v_entry_id;
+
+    INSERT INTO exit_records (entry_id, plate_number, road_id, space_id, entry_time, exit_time)
+    VALUES (v_entry_id, '赣G·33333', 6, 37,
+            CURRENT_DATE + INTERVAL '17 hours 30 minutes',
+            CURRENT_DATE + INTERVAL '18 hours 30 minutes');
+
+    -- 记录6: 鄂H·22222 在湖滨北路 H03 停2小时（吴十余额25.00→自动扣款14.00）
+    INSERT INTO entry_records (plate_number, road_id, space_id, entry_time, geomagnetic_status)
+    VALUES ('鄂H·22222', 8, 44, CURRENT_DATE + INTERVAL '10 hours', 'occupied')
+    RETURNING entry_id INTO v_entry_id;
+
+    INSERT INTO exit_records (entry_id, plate_number, road_id, space_id, entry_time, exit_time)
+    VALUES (v_entry_id, '鄂H·22222', 8, 44,
+            CURRENT_DATE + INTERVAL '10 hours',
+            CURRENT_DATE + INTERVAL '12 hours');
+
+    -- 记录7: 湘J·11111 在建设路 D03 停3小时（郑婷余额10.00→扣款15.00，不足→欠费）
+    INSERT INTO entry_records (plate_number, road_id, space_id, entry_time, geomagnetic_status)
+    VALUES ('湘J·11111', 4, 28, CURRENT_DATE + INTERVAL '9 hours', 'occupied')
+    RETURNING entry_id INTO v_entry_id;
+
+    INSERT INTO exit_records (entry_id, plate_number, road_id, space_id, entry_time, exit_time)
+    VALUES (v_entry_id, '湘J·11111', 4, 28,
+            CURRENT_DATE + INTERVAL '9 hours',
+            CURRENT_DATE + INTERVAL '12 hours');
+
+    -- 记录8: 闽F·77777 在科技园南路 G05 停1小时白天（孙八余额80.00→自动扣款6.00）
+    INSERT INTO entry_records (plate_number, road_id, space_id, entry_time, geomagnetic_status)
+    VALUES ('闽F·77777', 7, 41, CURRENT_DATE + INTERVAL '14 hours', 'occupied')
+    RETURNING entry_id INTO v_entry_id;
+
+    INSERT INTO exit_records (entry_id, plate_number, road_id, space_id, entry_time, exit_time)
+    VALUES (v_entry_id, '闽F·77777', 7, 41,
+            CURRENT_DATE + INTERVAL '14 hours',
+            CURRENT_DATE + INTERVAL '15 hours');
+
+    -- 记录9: 苏E·55555 再次在文化路 E06 停1.5小时（钱七余额0.00→欠费12.00）
+    INSERT INTO entry_records (plate_number, road_id, space_id, entry_time, geomagnetic_status)
+    VALUES ('苏E·55555', 5, 35, CURRENT_DATE + INTERVAL '13 hours', 'occupied')
+    RETURNING entry_id INTO v_entry_id;
+
+    INSERT INTO exit_records (entry_id, plate_number, road_id, space_id, entry_time, exit_time)
+    VALUES (v_entry_id, '苏E·55555', 5, 35,
+            CURRENT_DATE + INTERVAL '13 hours',
+            CURRENT_DATE + INTERVAL '14 hours 30 minutes');
+
+    -- 记录10: 京A·67890 在解放大道 C09 停2小时晚高峰（张三余额充足→自动扣款24.00）
+    INSERT INTO entry_records (plate_number, road_id, space_id, entry_time, geomagnetic_status)
+    VALUES ('京A·67890', 3, 23, CURRENT_DATE + INTERVAL '17 hours', 'occupied')
+    RETURNING entry_id INTO v_entry_id;
+
+    INSERT INTO exit_records (entry_id, plate_number, road_id, space_id, entry_time, exit_time)
+    VALUES (v_entry_id, '京A·67890', 3, 23,
+            CURRENT_DATE + INTERVAL '17 hours',
+            CURRENT_DATE + INTERVAL '19 hours');
+
+    -- 记录11: 浙D·99999 在建设路 D04 停2小时（赵六余额0.00→欠费10.00）
+    INSERT INTO entry_records (plate_number, road_id, space_id, entry_time, geomagnetic_status)
+    VALUES ('浙D·99999', 4, 29, CURRENT_DATE + INTERVAL '10 hours 30 minutes', 'occupied')
+    RETURNING entry_id INTO v_entry_id;
+
+    INSERT INTO exit_records (entry_id, plate_number, road_id, space_id, entry_time, exit_time)
+    VALUES (v_entry_id, '浙D·99999', 4, 29,
+            CURRENT_DATE + INTERVAL '10 hours 30 minutes',
+            CURRENT_DATE + INTERVAL '12 hours 30 minutes');
+
+    -- 记录12: 沪B·88888 在人民南路 B04 停4小时（李四余额15.00→扣款24.00，不足→欠费）
+    INSERT INTO entry_records (plate_number, road_id, space_id, entry_time, geomagnetic_status)
+    VALUES ('沪B·88888', 2, 12, CURRENT_DATE + INTERVAL '8 hours', 'occupied')
+    RETURNING entry_id INTO v_entry_id;
+
+    INSERT INTO exit_records (entry_id, plate_number, road_id, space_id, entry_time, exit_time)
+    VALUES (v_entry_id, '沪B·88888', 2, 12,
+            CURRENT_DATE + INTERVAL '8 hours',
+            CURRENT_DATE + INTERVAL '12 hours');
+
+    -- 记录13: 粤C·66666 在文化路 E03 停4小时（王五余额充足→自动扣款32.00）
+    INSERT INTO entry_records (plate_number, road_id, space_id, entry_time, geomagnetic_status)
+    VALUES ('粤C·66666', 5, 33, CURRENT_DATE + INTERVAL '11 hours', 'occupied')
+    RETURNING entry_id INTO v_entry_id;
+
+    INSERT INTO exit_records (entry_id, plate_number, road_id, space_id, entry_time, exit_time)
+    VALUES (v_entry_id, '粤C·66666', 5, 33,
+            CURRENT_DATE + INTERVAL '11 hours',
+            CURRENT_DATE + INTERVAL '15 hours');
+
+    -- 记录14: 湘J·11111 在湖滨北路 H05 停3小时（郑婷余额0.00→欠费21.00）
+    INSERT INTO entry_records (plate_number, road_id, space_id, entry_time, geomagnetic_status)
+    VALUES ('湘J·11111', 8, 46, CURRENT_DATE + INTERVAL '14 hours', 'occupied')
+    RETURNING entry_id INTO v_entry_id;
+
+    INSERT INTO exit_records (entry_id, plate_number, road_id, space_id, entry_time, exit_time)
+    VALUES (v_entry_id, '湘J·11111', 8, 46,
+            CURRENT_DATE + INTERVAL '14 hours',
+            CURRENT_DATE + INTERVAL '17 hours');
+
+    -- 记录15: 浙D·99999 再次在人民南路 B06 停1小时（赵六余额0.00→欠费6.00）
+    INSERT INTO entry_records (plate_number, road_id, space_id, entry_time, geomagnetic_status)
+    VALUES ('浙D·99999', 2, 14, CURRENT_DATE + INTERVAL '15 hours', 'occupied')
+    RETURNING entry_id INTO v_entry_id;
+
+    INSERT INTO exit_records (entry_id, plate_number, road_id, space_id, entry_time, exit_time)
+    VALUES (v_entry_id, '浙D·99999', 2, 14,
+            CURRENT_DATE + INTERVAL '15 hours',
+            CURRENT_DATE + INTERVAL '16 hours');
 END $$;
